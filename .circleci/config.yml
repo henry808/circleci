@@ -17,16 +17,18 @@ jobs:
       - run: echo "deploy done"
 
 workflows:
+  version: 2
+
   dev_workflow:
     jobs:
       - build:
         filters:
-          branch:
+          branches:
             only:
               - main
       - deploy:
         filters:
-          branch:
+          branches:
             only:
               - main
         requires:
