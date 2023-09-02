@@ -22,15 +22,6 @@ workflows:
   dev_workflow:
     jobs:
       - build:
-        filters:
-          branches:
-            only:
-              - main
-      - deploy:
-        filters:
-          branches:
-            only:
-              - main
       - deploy:
         requires:
         - build
