@@ -19,12 +19,12 @@ jobs:
 workflows:
   dev_workflow:
     jobs:
-      build:
+      - build:
         filter:
           branch:
             only:
               main
-      deploy:
+      - deploy:
         filter:
           branch:
             only:
