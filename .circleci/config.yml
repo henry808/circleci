@@ -21,7 +21,7 @@ workflows:
 
   dev_workflow:
     jobs:
-      - build:
-      - deploy:
+      - build
+      - deploy
         requires:
         - build
