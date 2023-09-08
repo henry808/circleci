@@ -7,11 +7,7 @@ jobs:
       - image: "circleci/python:3.6.4"
     steps:
       - checkout 
-      - restore_cache:
-          key: "{{ .Branch }}-test"
       - run: echo "build done"
-      - save_cache:
-          key: "{{ .Branch }}-test"
   deploy:
     working_directory: ~
     docker:
