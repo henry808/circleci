@@ -12,6 +12,9 @@ jobs:
       - run:
           name: Install flask
           command: pip3 install flask
+      - run:
+          name: Verify flask
+          command: pip3 list
       - run: echo "build done"
       - save_cache:
           key: "{{ .Branch }}-test"
