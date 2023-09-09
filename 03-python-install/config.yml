@@ -25,16 +25,13 @@ jobs:
           key: "{{ .Branch }}-test"
           paths:
             - "venv"
-  deploy-to-aws-s3:
+  deploy:
     working_directory: ~
     docker:
       - image: "circleci/python:3.10-browsers-legacy"
     steps:
       - checkout
-      - run:
-          name: Show branch
-          command: echo {{ .Branch }}
-
+      - run: echo "deploy done"
 
 workflows:
   version: 2
