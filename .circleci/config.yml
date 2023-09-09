@@ -4,11 +4,14 @@ jobs:
   build:
     working_directory: ~/repo
     docker:
-      - image: "circleci/python:3.6.4"
+      - image: "circleci/python:3.10-browsers-legacy"
     steps:
       - checkout 
       - restore_cache:
           key: "{{ .Branch }}-test"
+      - run:
+          name: Install flask
+          command: pip3 install flask
       - run: echo "build done"
       - save_cache:
           key: "{{ .Branch }}-test"
