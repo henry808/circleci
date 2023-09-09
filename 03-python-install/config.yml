@@ -1,0 +1,53 @@
+version: 2.1
+
+jobs:
+  build:
+    working_directory: ~/repo
+    docker:
+      - image: "circleci/python:3.10-browsers-legacy"
+    steps:
+      - checkout 
+      - restore_cache:
+          key: "{{ .Branch }}-test"
+      - run:
+          name: Install flask
+          command: |
+            /usr/local/bin/python -m pip install --upgrade pip
+            pip install flask
+      - run:
+          name: Verify pip version
+          command: pip --version
+      - run:
+          name: Verify flask
+          command: pip list
+      - run: echo "build done"
+      - save_cache:
+          key: "{{ .Branch }}-test"
+          paths:
+            - "venv"
+  deploy-to-aws-s3:
+    working_directory: ~
+    docker:
+      - image: "circleci/python:3.10-browsers-legacy"
+    steps:
+      - checkout
+      - run:
+          name: Show branch
+          command: echo {{ .Branch }}
+
+
+workflows:
+  version: 2
+
+  dev_workflow:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only: main
+      - deploy:
+          filters:
+            branches:
+              only: main
+          requires:
+          - build
